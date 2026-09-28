@@ -3,84 +3,111 @@
     "name": "Comcast",
     "url": "https://corporate.comcast.com",
     "background": "#FFFFFF",
-    "logo": "/images/companies/comcast.png"
+    "logo": "/images/companies/comcast.png",
+    "category": "end-user"
   },
   {
     "name": "Renault",
     "url": "https://www.renaultgroup.com",
     "background": "#FFFFFF",
-    "logo": "/images/companies/renault.png"
+    "logo": "/images/companies/renault.png",
+    "category": "end-user",
+    "useCase": "Cornerstone of Renault's Digital Cloud Platform: multi-cluster add-on lifecycles, event-driven automation, and workload distribution across fleets."
   },
   {
     "name": "Direction Générale des Finances Publiques",
     "url": "https://www.economie.gouv.fr/dgfip",
     "background": "#FFFFFF",
-    "logo": "/images/companies/dgfip.svg"
+    "logo": "/images/companies/dgfip.svg",
+    "category": "end-user",
+    "useCase": "Deploys all day-2 internal services for Kubo, the French state Kubernetes distribution, and everything issued from their operator and chart catalog."
   },
   {
     "name": "Mistral AI",
     "url": "https://mistral.ai/products/compute",
     "background": "#FFFFFF",
-    "logo": "/images/companies/mistral-ai.svg"
+    "logo": "/images/companies/mistral-ai.svg",
+    "category": "end-user",
+    "useCase": "Manages add-ons in the Mistral Kubernetes Service that powers Mistral Compute."
   },
   {
     "name": "RTL",
     "url": "https://www.rtl.nl/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/rtl.png"
+    "logo": "/images/companies/rtl.png",
+    "category": "end-user",
+    "useCase": "Delivers the in-cluster platform baseline (Argo CD, external-secrets, Karpenter, Gateway API) across a fleet of CAPI-provisioned AKS and EKS clusters."
   },
   {
     "name": "Engineering Ingegneria Informatica",
     "url": "https://www.eng.it/it",
     "background": "#FFFFFF",
-    "logo": "/images/companies/logo-eng.png"
+    "logo": "/images/companies/logo-eng.png",
+    "category": "end-user",
+    "useCase": "Provides on-demand Kubernetes clusters to developers with Crossplane and distributes add-ons at scale, using templates, events, and deployment ordering."
   },
   {
     "name": "Mirantis",
     "url": "https://www.mirantis.com/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/mirantis.svg"
+    "logo": "/images/companies/mirantis.svg",
+    "category": "platform",
+    "useCase": "The core of the k0rdent State Manager in Mirantis's open-source k0rdent project."
   },
   {
     "name": "Platform 9",
     "url": "https://platform9.com/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/platform9.jpg"
+    "logo": "/images/companies/platform9.jpg",
+    "category": "platform",
+    "useCase": "Add-on management for Private Cloud Director, their cloud management platform."
   },
   {
     "name": "SparkFabrik",
     "url": "https://www.sparkfabrik.com",
     "background": "#FFFFFF",
-    "logo":"/images/companies/SparkFabrikLogo.svg"
+    "logo": "/images/companies/SparkFabrikLogo.svg",
+    "category": "service-provider",
+    "useCase": "Automates infrastructure deployments across EKS, GKE, AKS, and on-premises, centrally managing add-on installs and upgrades."
   },
   {
     "name": "Clastix Labs",
     "url": "https://clastix.io/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/clastix.png"
+    "logo": "/images/companies/clastix.png",
+    "category": "platform",
+    "useCase": "Foundation of multi-cluster application and add-on delivery in the CLASTIX Enterprise Platform."
   },
   {
     "name": "IITS CONSULTING",
     "url": "https://iits-consulting.de/en/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/iits-consulting.svg"
+    "logo": "/images/companies/iits-consulting.svg",
+    "category": "service-provider",
+    "useCase": "Tests managed Kubernetes platforms at scale with 1000+ applications in agent-based mode, including edge environments, and predicts hub scaling limits."
   },
   {
     "name": "Tinext Cloud",
     "url": "https://cloud.tinext.com",
     "background": "#FFFFFF",
-    "logo": "/images/companies/tinext.svg"
+    "logo": "/images/companies/tinext.svg",
+    "category": "service-provider",
+    "useCase": "Automates deployment and management of preconfigured applications on customers' clusters in their Managed Kubernetes Service."
   },
   {
     "name": "Dinova",
     "url": "https://www.dinova.one",
     "background": "#FFFFFF",
-    "logo": "/images/companies/dinova.png"
+    "logo": "/images/companies/dinova.png",
+    "category": "service-provider",
+    "useCase": "Delivers isolated, drift-protected Kubernetes clusters to customers in Dinova Cloud Kubernetes Service."
   },
   {
     "name": "Software Craftsman",
     "url": "https://craftsman-software.com/",
     "background": "#FFFFFF",
-    "logo": "/images/companies/craaftsman.svg"
+    "logo": "/images/companies/craaftsman.svg",
+    "category": "platform",
+    "useCase": "Multi-cluster management in AppThrust, an application development platform, using the event framework and add-ons."
   }
 ]

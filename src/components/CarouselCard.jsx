@@ -54,6 +54,11 @@ const CarouselCard = ({company, border = false, variant = 'default'}) => {
         <p className={`${isSmall ? 'text-[0.875rem]' : 'text-[1rem] lg:text-[1.125rem]'} text-gray-500 font-[500] leading-snug line-clamp-2`}>
           {company.description}
         </p>
+        {isSmall && company.useCase && (
+          <p className="text-[0.875rem] text-gray-500 font-[400] leading-snug">
+            {company.useCase}
+          </p>
+        )}
       </div>
     </a>
   );

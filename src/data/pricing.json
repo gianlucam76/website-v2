@@ -1,3 +1,14 @@
 {
-    "enterprisePrice": 960
+    "currency": "$",
+    "tiers": [
+        {
+            "label": "Up to 50 clusters",
+            "price": 25000
+        },
+        {
+            "label": "51 to 100 clusters",
+            "price": 50000
+        }
+    ],
+    "largeFleetLabel": "More than 100 clusters"
 }

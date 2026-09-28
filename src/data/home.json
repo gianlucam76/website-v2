@@ -14,6 +14,13 @@
                 "iconName": "arrow"
             },
             {
+                "text": "Book a Demo",
+                "link": "/contact/",
+                "color": "white",
+                "type": "secondary",
+                "iconName": "arrow"
+            },
+            {
                 "text": "Give us a Star",
                 "link": "https://github.com/projectsveltos/addon-controller",
                 "color": "white",
@@ -90,22 +97,22 @@
         "image": "/images/background-images/entreprise-support.png",
         "heading": "Scale Your Fleet with Absolute Security and Control",
         "bullets": [
-           {
-               "title": "Pull Mode",
-               "text": "Enable zero-trust management where agents connect outbound to the management plane. Securely manage clusters without opening inbound ports or exposing API servers."
-           },
-           {
-               "title": "Progressive Rollouts & Promotions",
-               "text": "Minimize blast radius by staging deployments across environments. Promote changes from Dev to Production only after health checks pass, ensuring fleet-wide stability."
-           },
-           {
-               "title": "Job-based Checks",
-               "text": "Run active probes like smoke tests, synthetic transactions, connectivity checks as Kubernetes Jobs inside the managed clusters, using the Job outcome as the health verdict."
-           },
-           {
-               "title": "Integrated MCP Server",
-               "text": "Empower your AI-driven operations. Sveltos provides a native MCP Server, allowing AI SRE tools to securely discover, query, and manage your entire Kubernetes fleet using natural language."
-           }
+            {
+                "title": "Pull Mode",
+                "text": "Enable zero-trust management where agents connect outbound to the management plane. Securely manage clusters without opening inbound ports or exposing API servers."
+            },
+            {
+                "title": "Progressive Rollouts & Promotions",
+                "text": "Minimize blast radius by staging deployments across environments. Promote changes from Dev to Production only after health checks pass, ensuring fleet-wide stability."
+            },
+            {
+                "title": "Job-based Checks",
+                "text": "Run active probes like smoke tests, synthetic transactions, connectivity checks as Kubernetes Jobs inside the managed clusters, using the Job outcome as the health verdict."
+            },
+            {
+                "title": "Integrated MCP Server",
+                "text": "Empower your AI-driven operations. Sveltos provides a native MCP Server, allowing AI SRE tools to securely discover, query, and manage your entire Kubernetes fleet using natural language."
+            }
         ],
         "buttons": [
             {
@@ -263,6 +270,13 @@
                 "desc": "Deploy and syncronize NATS clusters across distributed environments using event-driven triggers."
             }
         ]
+    },
+    "scale": {
+        "tag": "Scale",
+        "heading": "Tested against 15,000 clusters",
+        "text": "We ran Sveltos against 15,000 vclusters to see how a fleet manager behaves at extreme scale. The write-up covers what the test revealed about performance, reliability, and architecture.",
+        "linkText": "Read the write-up",
+        "linkUrl": "/blog/gitops-15000-clusters-vcluster"
     },
     "integrations": {
         "tag": "Integrations & Ecosystem",

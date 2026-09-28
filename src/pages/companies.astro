@@ -11,6 +11,27 @@ const seoMetaData = {
   slug: 'companies/'
 };
 
+const adopterGroups = [
+  {
+    category: 'end-user',
+    heading: 'Companies running Sveltos',
+    blurb: 'Teams that use Sveltos to manage their own Kubernetes fleets.'
+  },
+  {
+    category: 'platform',
+    heading: 'Built on Sveltos',
+    blurb: 'Platforms and products that ship Sveltos as part of their multi-cluster layer.'
+  },
+  {
+    category: 'service-provider',
+    heading: 'Managed services and consultancies',
+    blurb: 'Providers that use Sveltos to deliver Kubernetes services to their customers.'
+  },
+].map((group) => ({
+  ...group,
+  companies: companies.filter((company) => company.category === group.category)
+}));
+
 const heroData = {
   headline: "Sveltos Adopters",
   subhead: 'From startups to Renault and Comcast — these are the companies and teams running Sveltos in production.',
@@ -44,18 +65,21 @@ const heroData = {
   </header>
   <main>
     <Section>
-      <div class="company-list w-full flex flex-wrap">
-        <h2 class="pl-[3rem] pt-[3rem] mb-0 text-[1.5rem] font-[500] leading-[125%] mb-[2.62rem] justify-self-start w-1/2">
-          Our Adopters
-        </h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-[5rem] gap-8">
-          {
-            companies.map((company) => (
-              <CarouselCard company={company} variant="small" border />
-            ))
-          }
-        </div>
+      {
+        adopterGroups.map((group) => (
+          <div class="w-full pb-[3rem]">
+            <div class="pl-[3rem] pt-[3rem] mb-[2.62rem]">
+              <h2 class="text-[1.5rem] font-[500] leading-[125%] mb-2">{group.heading}</h2>
+              <p class="text-gray m-0 max-w-2xl">{group.blurb}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {group.companies.map((company) => (
+                <CarouselCard company={company} variant="small" border />
+              ))}
+            </div>
+          </div>
+        ))
+      }
 
       <div class="relative cta w-full flex flex-wrap items-center justify-center min-h-[30rem] z-0">
         <div class="absolute top-0 right-0 bottom-0 left-0">
