@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import Button from '../components/Button.astro';
+import pricing from '../data/pricing.json';
+
+const seoMetaData = {
+  description: 'The business case for Sveltos: consistent clusters from day one, automatic recovery from drift, and one place to change what runs on every cluster.',
+  slug: 'business-case/'
+};
+
+const priceTiers = pricing.tiers.map((tier) => ({
+  label: tier.label,
+  price: `${pricing.currency}${tier.price.toLocaleString()}`,
+}));
+
+const outcomes = [
+  {
+    step: '01',
+    title: 'A new cluster arrives fully equipped',
+    text: 'You need a new production cluster. Give it the right labels and it receives every application it needs, the same way every other cluster in the fleet did.',
+  },
+  {
+    step: '02',
+    title: 'Drift recovers on its own',
+    text: 'On day 2, someone changes a resource by hand or deletes one by mistake. Sveltos detects the drift and restores the declared state, so a quick fix does not turn into a permanent difference between clusters.',
+  },
+  {
+    step: '03',
+    title: 'One change reaches every cluster',
+    text: 'One management cluster is the single place where you define what runs. Change something there once and Sveltos propagates it to every cluster that needs it.',
+  },
+];
+
+const beforeAfter = [
+  { situation: 'Adding a cluster', without: 'Follow a checklist or run scripts, and hope nothing was missed.', withSveltos: 'Apply the right labels. The cluster gets what it needs.' },
+  { situation: 'Changing a shared component', without: 'Repeat the change on each cluster, one at a time.', withSveltos: 'Change it once. Sveltos rolls it out to every matching cluster.' },
+  { situation: 'Someone edits a cluster by hand', without: 'The cluster quietly diverges until something breaks.', withSveltos: 'The drift is detected and the declared state is restored.' },
+  { situation: 'Rolling out a risky change', without: 'Push to everything and watch.', withSveltos: 'Promote through QA, staging, and production with health checks between stages.' },
+];
+
+const questions = [
+  {
+    question: 'Does it replace Argo CD or Flux?',
+    answer: 'No. Sveltos extends GitOps tools. Argo CD and Flux are strong at managing a single cluster, and Sveltos distributes that configuration across the whole fleet.',
+  },
+  {
+    question: 'What if we stop paying?',
+    answer: 'The Enterprise features stop working. Every open-source feature keeps running, so your fleet stays managed and the core is never locked away.',
+  },
+  {
+    question: 'Can we try it first?',
+    answer: 'Yes. The core is open source, Pull Mode and Progressive Rollouts can be tried within the free limits, and you can ask us for an Enterprise trial.',
+  },
+  {
+    question: 'Who else uses it?',
+    answer: 'Renault, Comcast, RTL, Mistral AI, and others. See the adopters page for how each of them uses Sveltos.',
+    link: { url: '/companies/', text: 'View adopters' },
+  },
+  {
+    question: 'How do you handle security issues?',
+    answer: 'There is a published disclosure process, and Enterprise customers receive patched images ahead of the next release.',
+    link: { url: '/security/', text: 'Read the security policy' },
+  },
+];
+
+const nextSteps = [
+  { step: '01', title: 'Install the open-source version', text: 'Register a few clusters and deploy one add-on to them by label.' },
+  { step: '02', title: 'Try it on a real workload', text: 'Add drift detection, ordering, or a progressive rollout and see how it behaves.' },
+  { step: '03', title: 'Talk to us when you are ready', text: 'We will size a license for your fleet or set up an Enterprise trial.' },
+];
+---
+
+<Layout title="The Business Case for Sveltos" seo={seoMetaData}>
+  <header>
+    <Hero
+      variant="standard"
+      headline="The case for managing your fleet with Sveltos"
+      subhead="A short read for the person who has to approve it. Consistent clusters from day one, automatic recovery from drift, and one place to change what runs everywhere."
+      isWhiteBg={true}
+      isSmall={true}
+      buttonsData={[
+        {
+          text: "Talk to us",
+          link: "/contact/",
+          type: "primary",
+          color: "blue",
+          iconName: "arrow"
+        }
+      ]}
+    />
+  </header>
+
+  <main>
+    <!-- THREE OUTCOMES -->
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-6xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">What you get</span>
+        <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">Consistency you do not have to enforce by hand</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {outcomes.map((item) => (
+            <div class="bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm">
+              <div class="text-[11px] font-bold text-primary mb-2 tracking-widest">{item.step}</div>
+              <h3 class="text-xl font-bold mb-3 text-black">{item.title}</h3>
+              <p class="text-gray m-0 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+
+    <!-- BEFORE / AFTER -->
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-background">
+      <div class="max-w-6xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">Day to day</span>
+        <h2 class="text-3xl lg:text-4xl mb-8 leading-tight">What changes for your team</h2>
+        <div class="overflow-x-auto border border-borderGray rounded-2xl bg-white">
+          <table class="w-full text-left border-collapse min-w-[40rem]">
+            <thead>
+              <tr class="bg-backgroundGray">
+                <th class="py-4 px-6 text-sm font-bold text-black">Situation</th>
+                <th class="py-4 px-6 text-sm font-bold text-black">Without Sveltos</th>
+                <th class="py-4 px-6 text-sm font-bold text-primary">With Sveltos</th>
+              </tr>
+            </thead>
+            <tbody>
+              {beforeAfter.map((row) => (
+                <tr class="border-t border-borderGray align-top">
+                  <td class="py-4 px-6 text-[0.95rem] font-semibold text-black">{row.situation}</td>
+                  <td class="py-4 px-6 text-[0.95rem] text-gray">{row.without}</td>
+                  <td class="py-4 px-6 text-[0.95rem] text-black font-medium">{row.withSveltos}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Section>
+
+    <!-- COST -->
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-6xl mx-auto w-full flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-1/2">
+          <span class="text-primary tag block mb-2">What it costs</span>
+          <h2 class="text-3xl lg:text-4xl mb-4 leading-tight">Free to start, priced by fleet size</h2>
+          <p class="text-lg text-gray leading-relaxed mb-4">
+            The core of Sveltos is open source and free forever. Enterprise adds priority support, priority security patches, and the advanced features, and is licensed per year by the number of managed clusters. The management cluster is not counted.
+          </p>
+          <a href="/pricing/" class="text-primary font-bold hover:underline">See the full plan comparison</a>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="border border-primary/25 rounded-2xl px-6 py-2 flex flex-col text-black bg-primary/5">
+            {priceTiers.map((tier) => (
+              <div class="flex items-baseline justify-between gap-4 py-4 border-b border-borderGray">
+                <span class="font-semibold">{tier.label}</span>
+                <span><span class="text-2xl font-bold">{tier.price}</span> <span class="text-sm text-gray">/ year</span></span>
+              </div>
+            ))}
+            <div class="flex items-baseline justify-between gap-4 py-4">
+              <span class="font-semibold">{pricing.largeFleetLabel}</span>
+              <a href="/contact/" class="text-primary font-semibold no-underline hover:underline">Contact us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+
+    <!-- QUESTIONS -->
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-background">
+      <div class="max-w-4xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">Before you decide</span>
+        <h2 class="text-3xl lg:text-4xl mb-8 leading-tight">Questions your team will ask</h2>
+        <div class="flex flex-col gap-4">
+          {questions.map((item) => (
+            <div class="bg-white border border-borderGray rounded-2xl p-6">
+              <h3 class="text-xl font-bold mb-2 text-black">{item.question}</h3>
+              <p class="text-gray m-0 leading-relaxed">{item.answer}</p>
+              {item.link && (
+                <a href={item.link.url} class="inline-block mt-3 text-primary font-semibold no-underline hover:underline">{item.link.text}</a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+
+    <!-- NEXT STEPS -->
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-6xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">Getting started</span>
+        <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">A low-risk way to evaluate</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {nextSteps.map((item) => (
+            <div class="bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm">
+              <div class="text-[11px] font-bold text-primary mb-2 tracking-widest">{item.step}</div>
+              <h3 class="text-xl font-bold mb-3 text-black">{item.title}</h3>
+              <p class="text-gray m-0 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <Button type="primary" cta="Talk to us" url="/contact/" color="blue" iconName="arrow" />
+          <Button type="secondary" cta="Install the open-source version" url="https://projectsveltos.github.io/sveltos/latest/getting_started/install/install/" color="black" iconName="arrow" target="_blank" />
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>

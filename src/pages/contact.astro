@@ -5,7 +5,8 @@ import Hero from '../components/Hero.astro';
 import Button from '../components/Button.astro';
 import pricing from '../data/pricing.json';
 
-const enterprisePriceFormatted = pricing.enterprisePrice.toLocaleString();
+const startingTier = pricing.tiers[0];
+const startingPriceFormatted = `${pricing.currency}${startingTier.price.toLocaleString()}`;
 const contactHeroImage = "/images/background-images/adopters.png"; // Placeholder or suitable image
 
 const seoMetaData = {
@@ -54,10 +55,6 @@ const calComUrl = "https://cal.com/gianluca-mardente-nuclsu/30min";
                     color="blue" 
                     iconName="arrow" 
                   />
-                  <p class="text-sm text-gray flex items-center gap-2 mt-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    Available slots today
-                  </p>
                 </div>
              </div>
              
@@ -98,9 +95,37 @@ const calComUrl = "https://cal.com/gianluca-mardente-nuclsu/30min";
                 </div>
               </div>
               <div class="flex flex-col gap-2">
+                <label for="company" class="text-[0.875rem] font-semibold text-black">Company</label>
+                <input type="text" id="company" name="company" placeholder="Acme Inc." required class="w-full border border-borderGray rounded-xl px-4 py-3 text-[0.9rem] focus:outline-none focus:border-primary transition-colors shadow-sm" />
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2">
+                  <label for="clusters" class="text-[0.875rem] font-semibold text-black">Number of clusters</label>
+                  <select id="clusters" name="clusters" class="w-full border border-borderGray rounded-xl px-4 py-3 text-[0.9rem] focus:outline-none focus:border-primary transition-colors bg-white shadow-sm">
+                    <option value="1-10">1 to 10</option>
+                    <option value="11-50">11 to 50</option>
+                    <option value="51-100">51 to 100</option>
+                    <option value="100+">More than 100</option>
+                    <option value="unknown">Not sure yet</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label for="current-tooling" class="text-[0.875rem] font-semibold text-black">What do you use today?</label>
+                  <select id="current-tooling" name="current-tooling" class="w-full border border-borderGray rounded-xl px-4 py-3 text-[0.9rem] focus:outline-none focus:border-primary transition-colors bg-white shadow-sm">
+                    <option value="argocd">Argo CD</option>
+                    <option value="flux">Flux</option>
+                    <option value="fleet">Rancher Fleet</option>
+                    <option value="scripts">Scripts or custom tooling</option>
+                    <option value="nothing">Nothing yet</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
                 <label for="interest" class="text-[0.875rem] font-semibold text-black">Interest</label>
                 <select id="interest" name="interest" class="w-full border border-borderGray rounded-xl px-4 py-3 text-[0.9rem] focus:outline-none focus:border-primary transition-colors bg-white shadow-sm">
-                  <option value="enterprise">Enterprise Support (${enterprisePriceFormatted}/cluster)</option>
+                  <option value="enterprise">Enterprise Support (from {startingPriceFormatted}/year)</option>
+                  <option value="trial">Enterprise Trial</option>
                   <option value="custom">Custom Development Quote</option>
                   <option value="demo">Live Product Demo</option>
                   <option value="other">Other Inquiry</option>

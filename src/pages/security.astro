@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+
+const seoMetaData = {
+  description: 'Sveltos security policy: how to report a vulnerability, how fast we respond, which versions receive fixes, and how Enterprise customers get patches.',
+  slug: 'security/'
+};
+
+const reportContents = [
+  'A description of the vulnerability and its potential impact',
+  'The affected components and versions',
+  'Steps to reproduce the issue',
+  'Proof-of-concept code, if you have it',
+  'Suggested remediation, if any',
+];
+
+const responseSteps = [
+  { title: 'Acknowledgement', text: 'You receive an acknowledgement within 2 business days.' },
+  { title: 'Investigation', text: 'We investigate and keep you informed of progress.' },
+  { title: 'Fix and release', text: 'Once the issue is confirmed, we work on a fix and coordinate a release.' },
+  { title: 'Disclosure', text: 'We disclose publicly after a fix is available, and credit you unless you prefer to remain anonymous.' },
+];
+---
+
+<Layout title="Security: Sveltos" seo={seoMetaData}>
+  <header>
+    <Hero
+      variant="standard"
+      headline="Security"
+      subhead="How to report a vulnerability, what happens next, and how fixes reach you."
+      isWhiteBg={true}
+      isSmall={true}
+    />
+  </header>
+
+  <main>
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-4xl mx-auto w-full flex flex-col gap-14">
+
+        <div>
+          <h2 class="text-3xl mb-4">Reporting a vulnerability</h2>
+          <p class="text-lg text-gray leading-relaxed mb-4">
+            Please do not report security vulnerabilities through public GitHub issues. Send an email to
+            <a href="mailto:support@projectsveltos.io" class="text-primary font-semibold">support@projectsveltos.io</a>.
+            The policy covers all repositories under the projectsveltos GitHub organization. Please include, as far as you can:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-lg text-gray">
+            {reportContents.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-3xl mb-6">What happens next</h2>
+          <ol class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none p-0 m-0">
+            {responseSteps.map((step, i) => (
+              <li class="bg-backgroundGray border border-borderGray rounded-2xl p-6">
+                <div class="text-[11px] font-bold text-primary mb-2 tracking-widest">0{i + 1}</div>
+                <h3 class="text-xl font-bold mb-2 text-black">{step.title}</h3>
+                <p class="text-gray m-0 leading-relaxed">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div>
+          <h2 class="text-3xl mb-4">Supported versions</h2>
+          <p class="text-lg text-gray leading-relaxed mb-0">
+            Community security fixes are released for the latest minor version, and we encourage everyone to stay on the latest release.
+          </p>
+        </div>
+
+        <div class="bg-primary/5 border border-primary/10 rounded-2xl p-8">
+          <h2 class="text-3xl mb-4">Enterprise customers</h2>
+          <p class="text-lg text-gray leading-relaxed mb-6">
+            When a CVE affects your deployment, Enterprise customers receive a patched image directly, ahead of the next scheduled release, with direct engineering access for urgent issues.
+          </p>
+          <a href="/pricing/" class="text-primary font-bold hover:underline">See Enterprise plans</a>
+        </div>
+
+      </div>
+    </Section>
+  </main>
+</Layout>

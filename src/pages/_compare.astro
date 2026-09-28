@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+
+const seoMetaData = {
+  description: 'How Sveltos compares to Rancher Fleet, Azure Kubernetes Fleet Manager (KubeFleet), and Red Hat ACM / Open Cluster Management for multi-cluster Kubernetes management.',
+  slug: 'compare/'
+};
+
+const products = ['Sveltos', 'Rancher Fleet', 'Azure Kubernetes Fleet Manager', 'Red Hat ACM / OCM'];
+
+// One row per capability; values are listed in the same order as `products`.
+const comparisonRows = [
+  { feature: 'Label-based cluster targeting', values: ['Yes', 'Yes', 'Yes', 'Yes'] },
+  { feature: 'Git as source', values: ['Optional', 'Required, Git-centric by design', 'Optional (preview)', 'Optional, via Argo CD ApplicationSet'] },
+  { feature: 'Drift detection', values: ['Yes, continuous', 'Yes', 'Yes, report-only diff mode', 'Yes, policy compliance status'] },
+  { feature: 'Automatic drift remediation', values: ['Yes', 'Yes', 'Partial', 'Yes, enforce mode'] },
+  { feature: 'Staged rollout across clusters', values: ['Yes (Enterprise beyond 2 stages)', 'Yes, partitions', 'Yes, rolling update and update runs', 'Yes, progressive placement'] },
+  { feature: 'Custom health-gated promotion', values: ['Yes: Lua, CEL, Prometheus, Job probes (Job probes are Enterprise)', 'Resource readiness', 'Readiness, approvals, maintenance windows', 'Policy compliance, failure thresholds'] },
+  { feature: 'Dependency ordering between deployments', values: ['Yes, per cluster', 'Not documented', 'Not documented', 'By sequencing separate policies'] },
+  { feature: 'Event-driven deployment', values: ['Yes', 'Not documented', 'Not documented', 'Not documented'] },
+  { feature: 'Cluster classification from runtime state', values: ['Yes', 'Not documented', 'Not documented', 'Not documented'] },
+  { feature: 'No agent on the managed cluster', values: ['Yes, agentless mode', 'No, agent required', 'No, AKS or Arc-enabled clusters only', 'No, klusterlet required'] },
+  { feature: 'Pull mode for firewalled or air-gapped clusters', values: ['Yes (Enterprise beyond 2 clusters)', 'Yes', 'Through Azure Arc', 'Yes'] },
+  { feature: 'Register any Kubernetes cluster', values: ['Yes', 'Yes', 'AKS or Arc-enabled only', 'Yes'] },
+  { feature: 'Per-cluster templating', values: ['Yes, general templating', 'Partial, Helm value overrides', 'Not documented', 'Partial, policy templates'] },
+  { feature: 'Built-in notifications (Slack, Teams, Discord, webhook)', values: ['Yes', 'Not documented', 'Not documented', 'Not documented'] },
+  { feature: 'Multi-tenancy', values: ['Yes', 'Yes', 'Yes', 'Yes'] },
+  { feature: 'AI assistant integration (MCP)', values: ['Yes (Enterprise)', 'Not documented', 'Not documented', 'Not documented'] },
+  { feature: 'Policy and compliance governance', values: ['Partial', 'Not a core feature', 'Not a core feature', 'Yes, flagship feature'] },
+  { feature: 'Cross-cluster networking', values: ['No', 'No', 'Yes (preview)', 'Yes, via Submariner'] },
+  { feature: 'Fleet-wide search and observability', values: ['Partial', 'Partial', 'Yes', 'Yes'] },
+  { feature: 'License', values: ['Open source core, Enterprise subscription', 'Open source, commercial support with Rancher Prime', 'Commercial Azure service', 'Open source upstream, commercial Red Hat ACM'] },
+];
+
+const onlySveltos = [
+  { title: 'Event-driven deployment', text: 'React to something happening inside a managed cluster and trigger a deployment or remediation, with per-event templated manifests.' },
+  { title: 'Per-cluster dependency ordering', text: 'Declare that one deployment depends on another and let Sveltos evaluate it per cluster, combined with health checks.' },
+  { title: 'Runtime cluster classification', text: 'Label clusters from their live state, or from resources on the management cluster, instead of static labels set at registration.' },
+  { title: 'Scriptable health gates', text: 'Gate individual deployments and rollout promotion with Lua, CEL, Prometheus queries, or an active Job probe.' },
+  { title: 'Zero-footprint agentless mode', text: 'Run drift detection, classification, and health checks centrally so a managed cluster needs no Sveltos component at all.' },
+];
+
+const othersStronger = [
+  { title: 'Policy and compliance governance', text: 'Red Hat ACM is built around governance first. Its policy framework is more mature than Sveltos health-check gating.' },
+  { title: 'Cross-cluster networking', text: 'Azure Kubernetes Fleet Manager and Red Hat ACM (through Submariner) connect clusters. Sveltos manages what runs on each cluster, not the connectivity between them.' },
+  { title: 'Cluster and node upgrade orchestration', text: 'Azure Kubernetes Fleet Manager update runs orchestrate Kubernetes and node image upgrades. In a Sveltos stack that is the job of Cluster API.' },
+  { title: 'Fleet-wide search', text: 'Red Hat ACM offers a search console across every managed cluster. Sveltos exposes status through CRDs and sveltosctl.' },
+  { title: 'Git as the only path', text: 'Rancher Fleet enforces GitOps. Teams that want that as a governance guarantee may prefer it. Sveltos treats Git as one source among several.' },
+];
+---
+
+<Layout title="Sveltos vs Rancher Fleet, Azure Fleet Manager, and Red Hat ACM" seo={seoMetaData}>
+  <header>
+    <Hero
+      variant="standard"
+      headline="How Sveltos compares"
+      subhead="A feature-by-feature look at Sveltos next to Rancher Fleet, Azure Kubernetes Fleet Manager, and Red Hat ACM. They overlap on the basics. The differences show up in orchestration, event handling, and how much you install on each managed cluster."
+      isWhiteBg={true}
+      isSmall={true}
+      buttonsData={[
+        {
+          text: "Talk to us",
+          link: "/contact/",
+          type: "primary",
+          color: "blue",
+          iconName: "arrow"
+        }
+      ]}
+    />
+  </header>
+
+  <main>
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="overflow-x-auto border border-borderGray rounded-2xl">
+          <table class="w-full text-left border-collapse min-w-[56rem]">
+            <thead>
+              <tr class="bg-backgroundGray">
+                <th class="py-4 px-4 text-sm font-bold text-black w-1/5">Capability</th>
+                {products.map((product, i) => (
+                  <th class={`py-4 px-4 text-sm font-bold ${i === 0 ? 'text-primary' : 'text-black'}`}>{product}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr class="border-t border-borderGray align-top">
+                  <td class="py-4 px-4 text-[0.9rem] font-semibold text-black">{row.feature}</td>
+                  {row.values.map((value, i) => (
+                    <td class={`py-4 px-4 text-[0.875rem] ${i === 0 ? 'text-black font-medium bg-primary/5' : 'text-gray'}`}>{value}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray mt-6 mb-0">
+          Last reviewed September 2026, based on each project's public documentation. "Not documented" means we did not find the capability in the documentation, not that it cannot be achieved another way. This is a comparison of feature presence, not of maturity or scale. Spot something inaccurate? Write to <a href="mailto:support@projectsveltos.io" class="text-primary font-semibold">support@projectsveltos.io</a>.
+        </p>
+      </div>
+    </Section>
+
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-background">
+      <div class="max-w-6xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">Where Sveltos differs</span>
+        <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">What only Sveltos does</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {onlySveltos.map((item) => (
+            <div class="bg-white border border-borderGray rounded-2xl p-6">
+              <h3 class="text-xl font-bold mb-2 text-black">{item.title}</h3>
+              <p class="text-gray m-0 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+
+    <Section sectionStyles="py-[3rem] px-[1.5rem] xl:px-[3.5rem] bg-white">
+      <div class="max-w-6xl mx-auto w-full">
+        <span class="text-primary tag block mb-2">Being straight with you</span>
+        <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">Where the others are stronger</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {othersStronger.map((item) => (
+            <div class="bg-backgroundGray border border-borderGray rounded-2xl p-6">
+              <h3 class="text-xl font-bold mb-2 text-black">{item.title}</h3>
+              <p class="text-gray m-0 leading-relaxed">{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 items-center justify-between bg-primary/5 border border-primary/10 rounded-2xl p-8">
+          <div>
+            <h3 class="text-xl font-bold text-black mb-1">Not sure which fits your fleet?</h3>
+            <p class="text-gray m-0">Book 30 minutes with the team and we will walk through your setup.</p>
+          </div>
+          <a href="/contact/" class="no-underline bg-primary text-white px-6 py-3 rounded-[6px] font-medium whitespace-nowrap hover:bg-[#3d5ab8] transition-colors">Talk to us</a>
+        </div>
+      </div>
+    </Section>
+  </main>
+</Layout>

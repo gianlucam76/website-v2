@@ -4,11 +4,15 @@ import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import Collapse from '../components/Collapse.astro';
 import Hero from '../components/Hero.astro';
+import pricing from '../data/pricing.json';
 
 const seoMetaData = {
   description: 'Frequently asked questions about Sveltos: how it works, what add-on formats it supports, how Pull Mode operates, and how to get started with multi-cluster Kubernetes management.',
   slug: 'faq/'
 };
+
+const [smallTier, mediumTier] = pricing.tiers;
+const formatPrice = (tier) => `${pricing.currency}${tier.price.toLocaleString()}`;
 
 const heroData = {
   headline: "Frequently Asked Questions",
@@ -39,6 +43,19 @@ const heroData = {
             <p class="text-lg leading-relaxed text-gray">
               Sveltos is an open-source Kubernetes add-on controller designed to simplify the deployment and management of Kubernetes add-ons and applications across hundreds of clusters. It provides declarative APIs to manage your entire fleet from a single management plane, whether on-prem, in the cloud, or in multi-tenant environments.
             </p>
+          </div>
+        </Collapse>
+
+        <Collapse title="How many clusters can Sveltos manage?" collapseID="cluster-scale">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray mb-4">
+              Thousands. We have tested Sveltos against 15,000 vclusters. When a fleet grows to hundreds of clusters and thousands of applications, Sveltos scales horizontally with sharding: add an annotation to your managed clusters and the shard controller automatically deploys a dedicated set of Sveltos controllers for each shard, then removes them when they are no longer needed. The practical ceiling depends on the resources you give the management cluster and on how many add-ons each cluster receives.
+            </p>
+            <div class="flex gap-4">
+              <a href="/blog/gitops-15000-clusters-vcluster" class="text-primary font-bold hover:underline">Read the 15,000 cluster test</a>
+              <span class="text-gray-300">|</span>
+              <a href="https://projectsveltos.github.io/sveltos/latest/scalability/horizontal_scaling_sharding/" target="_blank" class="text-primary font-bold hover:underline">How sharding works</a>
+            </div>
           </div>
         </Collapse>
 
@@ -104,7 +121,7 @@ const heroData = {
           </div>
         </Collapse>
 
-        <Collapse title="How does Sveltos perform progressive rollouts?" collapseID="drift-detection">
+        <Collapse title="How does Sveltos perform progressive rollouts?" collapseID="progressive-rollouts">
           <div class="relative flex flex-wrap pb-8">
             <p class="text-lg leading-relaxed text-gray">
               The <code>ClusterPromotion</code> Custom Resource Definition (CRD) solves the challenge of performing phased rollouts of cluster configurations and add-ons managed by Sveltos. We can avoid creating and managing multiple <code>ClusterProfile</code> resources with the same content. Instead, we define the configuration once and list the deployment stages in order.
@@ -116,6 +133,53 @@ const heroData = {
           <div class="relative flex flex-wrap pb-8">
             <p class="text-lg leading-relaxed text-gray">
               Pull Mode is designed for high-security, air-gapped, or restricted environments where the management cluster cannot directly reach managed clusters. In Pull Mode, a lightweight agent (Sveltos-agent) runs on each managed cluster and initiates outbound connections to poll the management cluster for updates. This eliminates the need for inbound firewall rules and works perfectly for clusters behind NAT or in private VPCs.
+            </p>
+          </div>
+        </Collapse>
+
+        <Collapse title="What does Sveltos Enterprise cost?" collapseID="enterprise-pricing">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray mb-4">
+              Sveltos is open source and free forever. Enterprise is priced per year by fleet size: {formatPrice(smallTier)} for {smallTier.label.toLowerCase()} and {formatPrice(mediumTier)} for {mediumTier.label.toLowerCase()}. For fleets larger than 100 clusters, contact us for a quote.
+            </p>
+            <div class="flex gap-4">
+              <a href="/pricing/" class="text-primary font-bold hover:underline">See pricing</a>
+              <span class="text-gray-300">|</span>
+              <a href="/contact/" class="text-primary font-bold hover:underline">Talk to us</a>
+            </div>
+          </div>
+        </Collapse>
+
+        <Collapse title="How are clusters counted for Enterprise pricing?" collapseID="enterprise-cluster-count">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray">
+              Only managed clusters count toward your fleet size. The management cluster that runs Sveltos is not included.
+            </p>
+          </div>
+        </Collapse>
+
+        <Collapse title="What is included in Enterprise that the open-source version does not have?" collapseID="enterprise-vs-oss">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray mb-4">
+              The core of Sveltos is open source: add-on distribution, deployment ordering, drift detection, templating, and the event framework. Pull Mode is free for up to 2 clusters and Progressive Rollouts for up to 2 ClusterPromotion instances, which is enough to try both on a real workload. Enterprise removes those limits and adds Job-based health validation, least-privilege agents, the MCP server, priority support, and priority CVE patches.
+            </p>
+            <a href="/pricing/#compare-plans" class="text-primary font-bold hover:underline">Compare plans</a>
+          </div>
+        </Collapse>
+
+        <Collapse title="Can I try Enterprise features before buying?" collapseID="enterprise-trial">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray mb-4">
+              Yes. You can try Pull Mode and Progressive Rollouts in the open-source version within the free limits, and you can contact us to set up a trial of the Enterprise features. Buy a license once you are happy with what you see.
+            </p>
+            <a href="/contact/" class="text-primary font-bold hover:underline">Ask for a trial</a>
+          </div>
+        </Collapse>
+
+        <Collapse title="What happens when an Enterprise license expires?" collapseID="enterprise-license-expiry">
+          <div class="relative flex flex-wrap pb-8">
+            <p class="text-lg leading-relaxed text-gray">
+              The Enterprise features stop working. Every open-source feature keeps running, so your fleet continues to be managed and there is no lock-in on the core.
             </p>
           </div>
         </Collapse>
