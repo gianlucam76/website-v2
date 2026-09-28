@@ -54,6 +54,18 @@ const questions = [
     answer: 'Yes. The core is open source, Pull Mode and Progressive Rollouts can be tried within the free limits, and you can ask us for an Enterprise trial.',
   },
   {
+    question: 'How do we find out when something needs attention?',
+    answer: 'Define your own rules for what matters to you, and Sveltos notifies you in Slack, Teams, or wherever you already watch alerts if it ever happens in any of your clusters. This applies to whatever you tell it to watch, not just drift.',
+  },
+  {
+    question: 'Can we isolate teams or customers on the same fleet?',
+    answer: 'Yes. ClusterProfile applies global policy across the fleet, and Profile scopes configuration to a single namespace, so separate teams or customers can share the same clusters without seeing each other’s configuration.',
+  },
+  {
+    question: 'Can this reach clusters we can’t open a firewall for?',
+    answer: 'Yes, with Pull Mode. Instead of the management cluster pushing to a target, a lightweight agent on the managed cluster polls the management cluster over an outbound connection, which works behind firewalls, at the edge, or in air-gapped environments.',
+  },
+  {
     question: 'Who else uses it?',
     answer: 'Renault, Comcast, RTL, Mistral AI, and others. See the adopters page for how each of them uses Sveltos.',
     link: { url: '/companies/', text: 'View adopters' },
@@ -100,9 +112,9 @@ const nextSteps = [
         <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">Consistency you do not have to enforce by hand</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {outcomes.map((item) => (
-            <div class="bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm">
-              <div class="text-[11px] font-bold text-primary mb-2 tracking-widest">{item.step}</div>
-              <h3 class="text-xl font-bold mb-3 text-black">{item.title}</h3>
+            <div class="group bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:border-primary/40 hover:z-10">
+              <div class="inline-flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold text-primary mb-2 tracking-widest bg-primary/10 transition-colors duration-300 group-hover:bg-primary group-hover:text-white">{item.step}</div>
+              <h3 class="text-xl font-bold mb-3 text-black transition-colors duration-300 group-hover:text-primary">{item.title}</h3>
               <p class="text-gray m-0 leading-relaxed">{item.text}</p>
             </div>
           ))}
@@ -173,8 +185,8 @@ const nextSteps = [
         <h2 class="text-3xl lg:text-4xl mb-8 leading-tight">Questions your team will ask</h2>
         <div class="flex flex-col gap-4">
           {questions.map((item) => (
-            <div class="bg-white border border-borderGray rounded-2xl p-6">
-              <h3 class="text-xl font-bold mb-2 text-black">{item.question}</h3>
+            <div class="group bg-white border border-borderGray rounded-2xl p-6 transition-all duration-300 ease-out hover:-translate-x-1 hover:shadow-lg hover:border-primary/40 hover:z-10">
+              <h3 class="text-xl font-bold mb-2 text-black transition-colors duration-300 group-hover:text-primary">{item.question}</h3>
               <p class="text-gray m-0 leading-relaxed">{item.answer}</p>
               {item.link && (
                 <a href={item.link.url} class="inline-block mt-3 text-primary font-semibold no-underline hover:underline">{item.link.text}</a>
@@ -192,9 +204,9 @@ const nextSteps = [
         <h2 class="text-3xl lg:text-4xl mb-10 leading-tight">A low-risk way to evaluate</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {nextSteps.map((item) => (
-            <div class="bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm">
-              <div class="text-[11px] font-bold text-primary mb-2 tracking-widest">{item.step}</div>
-              <h3 class="text-xl font-bold mb-3 text-black">{item.title}</h3>
+            <div class="group bg-white border border-[#e8e8e8] rounded-xl p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:border-primary/40 hover:z-10">
+              <div class="inline-flex items-center justify-center w-7 h-7 rounded-full text-[11px] font-bold text-primary mb-2 tracking-widest bg-primary/10 transition-colors duration-300 group-hover:bg-primary group-hover:text-white">{item.step}</div>
+              <h3 class="text-xl font-bold mb-3 text-black transition-colors duration-300 group-hover:text-primary">{item.title}</h3>
               <p class="text-gray m-0 leading-relaxed">{item.text}</p>
             </div>
           ))}
